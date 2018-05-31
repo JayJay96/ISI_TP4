@@ -16,6 +16,7 @@ public class Controller {
 	private static Map<Integer, Color> colors;
 	private Map<Tortue, List<Segment>> tortues = new HashMap<>();
 	private Tortue courante;
+	private Integer lastTurtleId = 0;
 	
 	private Controller(){
 		
@@ -38,7 +39,7 @@ public class Controller {
 	}
 	
 	public Tortue createTortue(){
-		Tortue t = new Tortue();
+		Tortue t = new Tortue(++lastTurtleId);
 		tortues.put(t, new ArrayList<>());
 		return t;
 	}
@@ -59,7 +60,8 @@ public class Controller {
 
 		if(!tortues.containsKey(t))
 			tortues.put(t, new ArrayList<Segment>());
-		tortues.get(t).add(seg);
+		if(t.isCrayon())
+			tortues.get(t).add(seg);
 	}
 	
 	public void drawForm(Form form){
