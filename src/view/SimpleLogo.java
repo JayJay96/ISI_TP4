@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import controller.Controller;
+import controller.RandomTurtlesThread;
 import model.Carre;
 import model.Form;
 import model.Poly;
@@ -51,7 +52,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		   SwingUtilities.invokeLater(new Runnable(){
 				public void run(){
 
-					SimpleLogo fenetre = new SimpleLogo();
+					ChooserFrame fenetre = new ChooserFrame();
 					fenetre.setVisible(true);
 				}
 			});
@@ -62,7 +63,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		System.exit(0);
 	}
 
-	public SimpleLogo() {
+	public SimpleLogo(int i) {
 		super("un logo tout simple");
 		logoInit();
 		
@@ -73,6 +74,11 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		        System.exit(0);
 		    }
 		});
+		
+		if(i == 1){
+			RandomTurtlesThread thread = new RandomTurtlesThread(feuille);
+			thread.start();
+		}
 	}
 
 	public void logoInit() {

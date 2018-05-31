@@ -42,9 +42,9 @@ public class ChooserFrame extends JFrame implements ActionListener {
 		
 		SimpleLogo mainFrame = null;
 		if(c.equals("controlledMode")){
-			mainFrame = new SimpleLogo();
+			mainFrame = new SimpleLogo(0);
 		} else if (c.equals("automaticMode")){
-			mainFrame = new SimpleLogo();
+			mainFrame = new SimpleLogo(1);
 		}
 		dispose();
 	}
