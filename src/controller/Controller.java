@@ -41,8 +41,8 @@ public class Controller {
 		colors.put(11, Color.YELLOW);	
 	}
 	
-	public Tortue createTortue(Integer arrowColor){
-		Tortue t = new Tortue(++lastTurtleId, arrowColor);
+	public Tortue createTortue(Integer arrowColor, Integer x, Integer y){
+		Tortue t = new Tortue(++lastTurtleId, arrowColor, x, y);
 		tortues.put(t, new ArrayList<>());
 		return t;
 	}

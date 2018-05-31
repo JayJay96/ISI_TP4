@@ -155,7 +155,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 
 		getContentPane().add(p2,"South");
 
-		feuille = new FeuilleDessin(); //500, 400);
+		feuille = new FeuilleDessin(this); //500, 400);
 		feuille.setBackground(Color.white);
 		feuille.setSize(new Dimension(600,400));
 		feuille.setPreferredSize(new Dimension(600,400));
@@ -163,10 +163,8 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		getContentPane().add(feuille,"Center");
 		
 		// Creation de la tortue
-		Tortue tortue = controller.createTortue(colorList.getSelectedIndex());
-		
-		// Deplacement de la tortue au centre de la feuille
-		tortue.setPosition(500/2, 400/2);
+		Dimension size = feuille.getSize();
+		Tortue tortue = controller.createTortue(colorList.getSelectedIndex(), size.width/2, size.height/2);
 		controller.setCourante(tortue);
 
 		pack();
@@ -215,7 +213,8 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		else if (c.equals("Baisser"))
 			controller.getCourante().baisserCrayon();
 		else if(c.equals("Ajouter")){
-			Tortue t = controller.createTortue(colorList.getSelectedIndex());
+			Dimension size = feuille.getSize();
+			Tortue t = controller.createTortue(colorList.getSelectedIndex(), size.width/2, size.height/2);
 			t.setPosition(500/2, 400/2);
 		}
 		// actions des boutons du bas
@@ -258,6 +257,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		// Replace la tortue au centre
 		Dimension size = feuille.getSize();
 		controller.getCourante().setPosition(size.width/2, size.height/2);
+		colorList.setSelectedIndex(0);
 	}
 
 	//utilitaires pour installer des boutons et des menus
@@ -296,5 +296,9 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			else
 				menuItem.setAccelerator(KeyStroke.getKeyStroke(key, 0, false));
 		}
+	}
+
+	public JComboBox getColorList() {
+		return colorList;
 	}
 }
