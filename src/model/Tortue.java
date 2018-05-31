@@ -38,13 +38,13 @@ public class Tortue implements Comparable<Tortue>
 	public void setColor(int n) {coul = n;}
 	public int getColor() {return coul;}
 
-	public Tortue(Integer id, Integer arrowColor) {
+	public Tortue(Integer id, Integer arrowColor, Integer x, Integer y) {
 		this.id = id;
 		this.arrowColor = arrowColor;
-		reset();
+		reset(x, y);
 	}
 
-	public void reset() {
+	public void reset(Integer x, Integer y) {
 		x = 0;
 		y = 0;
 		dir = -90;

@@ -29,15 +29,17 @@ public class FeuilleDessin extends JPanel implements MouseListener{
 
 	private static final long serialVersionUID = 1L;
 	private Controller controller = Controller.getInstance();
+	private SimpleLogo logo;
 
-	public FeuilleDessin() {
+	public FeuilleDessin(SimpleLogo logo) {
+		this.logo = logo;
 		addMouseListener(this);
 	}
 
 	public void reset() {
 		for(Entry<Tortue, List<Segment>> tortue : controller.getTortues().entrySet()){
 			tortue.getValue().clear();
-			tortue.getKey().reset();
+			tortue.getKey().reset(getSize().width/2, getSize().height/2);
 		}
 	}
 
@@ -107,6 +109,7 @@ public class FeuilleDessin extends JPanel implements MouseListener{
 		for(Entry<Tortue, Polygon> polygon : controller.getPolygon().entrySet()){
 			if(polygon.getValue().contains(e.getPoint())){
 				controller.setCourante(polygon.getKey());
+				logo.getColorList().setSelectedIndex(polygon.getKey().getColor());
 				return;
 			}
 		}
