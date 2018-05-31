@@ -23,7 +23,7 @@ import java.io.*;
 **************************************************************************/
 
 
-public class Tortue
+public class Tortue implements Comparable<Tortue>
 {
 	public static final int rp=10, rb=5; // Taille de la pointe et de la base de la fleche
 	public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
@@ -33,12 +33,14 @@ public class Tortue
 	private int dir;
 	private boolean crayon; 
 	private int coul;
+	private int arrowColor;
 	
 	public void setColor(int n) {coul = n;}
 	public int getColor() {return coul;}
 
-	public Tortue(Integer id) {
+	public Tortue(Integer id, Integer arrowColor) {
 		this.id = id;
+		this.arrowColor = arrowColor;
 		reset();
 	}
 
@@ -133,5 +135,18 @@ public class Tortue
 	}
 	public void setCrayon(boolean crayon) {
 		this.crayon = crayon;
+	}
+	public int getArrowColor() {
+		return arrowColor;
+	}
+	public void setArrowColor(int arrowColor) {
+		this.arrowColor = arrowColor;
+	}
+	@Override
+	public int compareTo(Tortue o) {
+		if(o.id == this.id){
+			return 0;
+		}
+		return 1;
 	}
 }

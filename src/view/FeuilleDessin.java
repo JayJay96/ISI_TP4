@@ -3,6 +3,8 @@ package view;
 // package logo;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -23,19 +25,20 @@ import java.util.Map.Entry;
  * @version 2.0
  */
 
-public class FeuilleDessin extends JPanel {
+public class FeuilleDessin extends JPanel implements MouseListener{
+
+	private static final long serialVersionUID = 1L;
 	private Controller controller = Controller.getInstance();
 
 	public FeuilleDessin() {
-		
+		addMouseListener(this);
 	}
 
 	public void reset() {
 		for(Entry<Tortue, List<Segment>> tortue : controller.getTortues().entrySet()){
-			tortue.getKey().reset();
 			tortue.getValue().clear();
+			tortue.getKey().reset();
 		}
-			
 	}
 
 	public void paintComponent(Graphics g) {
@@ -93,7 +96,40 @@ public class FeuilleDessin extends JPanel {
 		  (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
 
 		arrow.addPoint(p2.x,p2.y);
-		graph.setColor(Color.green);
+		graph.setColor(controller.getColors().containsKey(t.getArrowColor())?controller.getColors().get(t.getArrowColor()) : Color.BLACK);
 		graph.fillPolygon(arrow);
+		
+		controller.getPolygon().put(t, arrow);
     }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		for(Entry<Tortue, Polygon> polygon : controller.getPolygon().entrySet()){
+			if(polygon.getValue().contains(e.getPoint())){
+				controller.setCourante(polygon.getKey());
+				return;
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		return;
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		return;
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		return;
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		return;
+		
+	}
 }
