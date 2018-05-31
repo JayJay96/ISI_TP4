@@ -23,8 +23,8 @@ public class ChooserFrame extends JFrame implements ActionListener {
 		controlledMode.setActionCommand("controlledMode");
 		controlledMode.addActionListener(this);
 		JButton automaticMode = new JButton("Tortues automatiques");
-		controlledMode.setActionCommand("automaticMode");
-		controlledMode.addActionListener(this);
+		automaticMode.setActionCommand("automaticMode");
+		automaticMode.addActionListener(this);
 		
 		buttonPanel.add(controlledMode);
 		buttonPanel.add(automaticMode);
@@ -46,9 +46,7 @@ public class ChooserFrame extends JFrame implements ActionListener {
 		} else if (c.equals("automaticMode")){
 			mainFrame = new SimpleLogo();
 		}
-		
-		mainFrame.setVisible(true);
-		this.dispose();
+		dispose();
 	}
 	
 	
