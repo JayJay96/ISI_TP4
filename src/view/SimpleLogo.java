@@ -41,6 +41,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	private FeuilleDessin feuille;
 	private Controller controller = Controller.getInstance();
 	private JTextField inputValue;
+	private JComboBox colorList;
 
 
 	/**
@@ -94,6 +95,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		addButton(toolBar, "Gauche", "Gauche 45", null);
 		addButton(toolBar, "Lever", "Lever Crayon", null);
 		addButton(toolBar, "Baisser", "Baisser Crayon", null);
+		addButton(toolBar, "Ajouter", "Ajouter une tortue", null);
 
 		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
 								 "vert", "gris clair", "magenta", "orange",
@@ -103,7 +105,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		toolBar.add(Box.createRigidArea(HGAP));
 		JLabel colorLabel = new JLabel("   Couleur: ");
 		toolBar.add(colorLabel);
-		JComboBox colorList = new JComboBox(colorStrings);
+		colorList = new JComboBox(colorStrings);
 		toolBar.add(colorList);
 
 		colorList.addActionListener(new ActionListener() {
@@ -161,7 +163,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		getContentPane().add(feuille,"Center");
 		
 		// Creation de la tortue
-		Tortue tortue = controller.createTortue();
+		Tortue tortue = controller.createTortue(colorList.getSelectedIndex());
 		
 		// Deplacement de la tortue au centre de la feuille
 		tortue.setPosition(500/2, 400/2);
@@ -212,6 +214,10 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			controller.getCourante().leverCrayon();
 		else if (c.equals("Baisser"))
 			controller.getCourante().baisserCrayon();
+		else if(c.equals("Ajouter")){
+			Tortue t = controller.createTortue(colorList.getSelectedIndex());
+			t.setPosition(500/2, 400/2);
+		}
 		// actions des boutons du bas
 		else if (c.equals("Proc1"))
 			proc1();
