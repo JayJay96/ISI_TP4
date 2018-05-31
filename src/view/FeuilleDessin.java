@@ -25,14 +25,17 @@ import java.util.Map.Entry;
 
 public class FeuilleDessin extends JPanel {
 	private Controller controller = Controller.getInstance();
-	
+
 	public FeuilleDessin() {
 		
 	}
 
 	public void reset() {
-		for(Entry<Tortue, List<Segment>> tortue : controller.getTortues().entrySet())
+		for(Entry<Tortue, List<Segment>> tortue : controller.getTortues().entrySet()){
 			tortue.getKey().reset();
+			tortue.getValue().clear();
+		}
+			
 	}
 
 	public void paintComponent(Graphics g) {
@@ -44,7 +47,7 @@ public class FeuilleDessin extends JPanel {
 		g.setColor(Color.white);
 		g.fillRect(0,0,dim.width, dim.height);
 		g.setColor(c);
-
+		
 		showTurtles(g);
 	}
 	

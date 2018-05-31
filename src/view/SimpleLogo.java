@@ -94,6 +94,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		addButton(toolBar, "Gauche", "Gauche 45", null);
 		addButton(toolBar, "Lever", "Lever Crayon", null);
 		addButton(toolBar, "Baisser", "Baisser Crayon", null);
+		addButton(toolBar, "Ajouter", "Ajouter Tortue", null);
 
 		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
 								 "vert", "gris clair", "magenta", "orange",
@@ -212,6 +213,11 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			controller.getCourante().leverCrayon();
 		else if (c.equals("Baisser"))
 			controller.getCourante().baisserCrayon();
+		else if(c.equals("Ajouter")){
+			Tortue tortue = controller.createTortue();
+			controller.getTortues().put(tortue, new ArrayList<>());
+			tortue.setPosition(500/2, 400/2);
+		}
 		// actions des boutons du bas
 		else if (c.equals("Proc1"))
 			proc1();
@@ -241,6 +247,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	public void proc3() {
 		Form spiral = new Spiral();
 		controller.createForm(controller.getCourante(), spiral, 50, 40, 6);
+		
 	}
 
 	// efface tout et reinitialise la feuille
