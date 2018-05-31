@@ -29,7 +29,7 @@ public class FeuilleDessin extends JPanel implements MouseListener{
 
 	private static final long serialVersionUID = 1L;
 	private Controller controller = Controller.getInstance();
-	
+
 	public FeuilleDessin() {
 		addMouseListener(this);
 	}
@@ -50,7 +50,7 @@ public class FeuilleDessin extends JPanel implements MouseListener{
 		g.setColor(Color.white);
 		g.fillRect(0,0,dim.width, dim.height);
 		g.setColor(c);
-
+		
 		showTurtles(g);
 	}
 	
@@ -129,7 +129,7 @@ public class FeuilleDessin extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		return;
 		
 	}
 }

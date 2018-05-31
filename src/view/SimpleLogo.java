@@ -247,6 +247,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	public void proc3() {
 		Form spiral = new Spiral();
 		controller.createForm(controller.getCourante(), spiral, 50, 40, 6);
+		
 	}
 
 	// efface tout et reinitialise la feuille
