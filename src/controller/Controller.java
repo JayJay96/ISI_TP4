@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Color;
 import java.awt.Polygon;
+import java.awt.Shape;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class Controller {
 	public static Controller INSTANCE = new Controller(); 
 	private static Map<Integer, Color> colors;
 	private Map<Tortue, List<Segment>> tortues = new HashMap<>();
-	private Map<Tortue, Polygon> polygon = new TreeMap<>();
+	private Map<Tortue, Shape> polygon = new TreeMap<>();
 	private Tortue courante;
 	private Integer lastTurtleId = 0;
 	private int xMax, xMin, yMax, yMin;
@@ -42,8 +43,8 @@ public class Controller {
 		colors.put(11, Color.YELLOW);	
 	}
 	
-	public Tortue createTortue(Integer arrowColor, Integer x, Integer y){
-		Tortue t = new Tortue(++lastTurtleId, arrowColor, x, y);
+	public Tortue createTortue(Integer arrowColor, String shape, Integer x, Integer y){
+		Tortue t = new Tortue(++lastTurtleId, arrowColor, shape, x, y);
 		tortues.put(t, new ArrayList<>());
 		return t;
 	}
@@ -123,7 +124,7 @@ public class Controller {
 		return colors;
 	}
 
-	public Map<Tortue, Polygon> getPolygon() {
+	public Map<Tortue, Shape> getPolygon() {
 		return polygon;
 	}
 }
