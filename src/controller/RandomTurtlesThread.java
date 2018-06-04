@@ -14,7 +14,7 @@ public class RandomTurtlesThread extends Thread {
 	public RandomTurtlesThread(FeuilleDessin feuille) {
 		Dimension dim = feuille.getSize();
 		for(int i = 0; i <5; i++){
-			Tortue t = controller.createTortue(i,"LOL" ,dim.height/2, dim.width/2 );
+			Tortue t = controller.createTortue(i,"LOL" ,dim.width/2, dim.height/2 );
 			t.setColor(i);
 			t.setPosition(dim.height/2, dim.width/2);
 		}

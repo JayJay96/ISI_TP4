@@ -65,7 +65,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	}
 
 	public SimpleLogo(int i) {
-		super("un logo tout simple");
+		super("TP4 Alibert - Rigaud");
 		logoInit();
 		
 		addWindowListener(new WindowAdapter() {
@@ -80,6 +80,13 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			RandomTurtlesThread thread = new RandomTurtlesThread(feuille);
 			thread.start();
 		}
+		
+		this.addComponentListener(new ComponentAdapter() {
+		    public void componentResized(ComponentEvent componentEvent) {
+		        controller.setxMax(feuille.getWidth());
+		        controller.setyMax(feuille.getHeight());
+		    }
+		});
 	}
 
 	public void logoInit() {
@@ -231,7 +238,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			controller.getCourante().baisserCrayon();
 		else if(c.equals("Ajouter")){
 			Dimension size = feuille.getSize();
-			Tortue t = controller.createTortue(colorList.getSelectedIndex(), shapeList.getSelectedItem().toString(), size.height/2, size.width/2);
+			Tortue t = controller.createTortue(colorList.getSelectedIndex(), shapeList.getSelectedItem().toString(), size.width/2, size.height/2);
 		}
 		// actions des boutons du bas
 		else if (c.equals("Proc1"))
