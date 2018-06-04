@@ -51,7 +51,7 @@ public class Tortue implements Comparable<Tortue>
 		this.y = y;
 		dir = -90;
 		coul = 0;
-		crayon = true;
+		crayon = false;
   	}
 
 	public void setPosition(int newX, int newY) {

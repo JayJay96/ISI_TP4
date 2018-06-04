@@ -58,13 +58,13 @@ public class Controller {
 			seg = truncateSegment(t, seg, xMax, t.getY());
 			t.setPosition(t.getX() - xMax, t.getY());
 		} else if (t.getX() < xMin){
-			seg = truncateSegment(t, seg, xMax, t.getY());
+			seg = truncateSegment(t, seg, xMin, t.getY());
 			t.setPosition(xMax + t.getX(), t.getY());
 		} else if (t.getY() > yMax){
 			seg = truncateSegment(t, seg, t.getX(), yMax);
 			t.setPosition(t.getX(), t.getY() - yMax);
 		} else if (t.getY() < yMin){
-			seg = truncateSegment(t, seg, t.getX(), yMax);
+			seg = truncateSegment(t, seg, t.getX(), yMin);
 			t.setPosition(t.getX(), yMax + t.getY());
 		}
 		seg.getPtEnd().x = t.getX();
