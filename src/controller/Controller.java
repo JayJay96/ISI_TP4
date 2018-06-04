@@ -59,17 +59,19 @@ public class Controller {
 		seg.getPtStart().x = t.getX();
 		seg.getPtStart().y = t.getY();
 		t.avancer(dist);
-		t.leverCrayon();
 		if(t.getX() > xMax){
-			t.setPosition(xMax - t.getX(), t.getY());
+			seg = truncateSegment(t, seg, xMax, t.getY());
+			t.setPosition(t.getX() - xMax, t.getY());
 		} else if (t.getX() < xMin){
+			seg = truncateSegment(t, seg, xMax, t.getY());
 			t.setPosition(xMax + t.getX(), t.getY());
 		} else if (t.getY() > yMax){
-			t.setPosition(t.getX(), yMax - t.getY());
+			seg = truncateSegment(t, seg, t.getX(), yMax);
+			t.setPosition(t.getX(), t.getY() - yMax);
 		} else if (t.getY() < yMin){
-			t.setPosition(t.getX(), yMin + t.getY());
+			seg = truncateSegment(t, seg, t.getX(), yMax);
+			t.setPosition(t.getX(), yMax + t.getY());
 		}
-		t.baisserCrayon();
 		seg.getPtEnd().x = t.getX();
 		seg.getPtEnd().y = t.getY();
 		seg.setColor(colors.containsKey(t.getColor())? colors.get(t.getColor()): Color.BLACK);
@@ -78,6 +80,25 @@ public class Controller {
 			tortues.put(t, new ArrayList<Segment>());
 		if(t.isCrayon())
 			tortues.get(t).add(seg);
+	}
+	
+	private Segment truncateSegment(Tortue tortue, Segment segment ,int x, int y){
+		if(tortue.isCrayon()){
+			segment.getPtEnd().x = x;
+			segment.getPtEnd().y =y;
+			tortues.get(tortue).add(segment);
+
+		}
+		
+		Segment newSeg = new Segment();
+		if(x == xMax){
+			newSeg.getPtStart().x=0;
+			newSeg.getPtStart().y = tortue.getY();
+		} else {
+			newSeg.getPtStart().x = tortue.getX();
+			newSeg.getPtStart().y = 0;
+		}
+		return newSeg;
 	}
 	
 	public void setxMax(int xMax) {
