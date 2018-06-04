@@ -72,41 +72,14 @@ public class FeuilleDessin extends JPanel implements MouseListener{
 			seg.drawSegment(graph);
 		}
 
-		//Calcule les 3 coins du triangle a partir de
-		// la position de la tortue p
-		Point p = new Point(t.getX(),t.getY());
-		Polygon arrow = new Polygon();
-
-		//Calcule des deux bases
-		//Angle de la droite
-		double theta=Tortue.ratioDegRad*(t.getDir()*-1);
-		//Demi angle au sommet du triangle
-		double alpha=Math.atan( (float)Tortue.rb / (float)Tortue.rp );
-		//Rayon de la fleche
-		double r=Math.sqrt( Tortue.rp*Tortue.rp + Tortue.rb*Tortue.rb );
-		//Sens de la fleche
-
-		//Pointe
-		Point p2=new Point((int) Math.round(p.x+r*Math.cos(theta)),
-						 (int) Math.round(p.y-r*Math.sin(theta)));
-		arrow.addPoint(p2.x,p2.y);
-		arrow.addPoint((int) Math.round( p2.x-r*Math.cos(theta + alpha) ),
-		  (int) Math.round( p2.y+r*Math.sin(theta + alpha) ));
-
-		//Base2
-		arrow.addPoint((int) Math.round( p2.x-r*Math.cos(theta - alpha) ),
-		  (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
-
-		arrow.addPoint(p2.x,p2.y);
-		graph.setColor(controller.getColors().containsKey(t.getArrowColor())?controller.getColors().get(t.getArrowColor()) : Color.BLACK);
-		graph.fillPolygon(arrow);
+		Shape arrow = ShapeFactory.getInstance().createShape(t, graph, t.getX(), t.getY());
 		
 		controller.getPolygon().put(t, arrow);
     }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		for(Entry<Tortue, Polygon> polygon : controller.getPolygon().entrySet()){
+		for(Entry<Tortue, Shape> polygon : controller.getPolygon().entrySet()){
 			if(polygon.getValue().contains(e.getPoint())){
 				controller.setCourante(polygon.getKey());
 				logo.getColorList().setSelectedIndex(polygon.getKey().getColor());

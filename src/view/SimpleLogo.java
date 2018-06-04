@@ -43,6 +43,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	private Controller controller = Controller.getInstance();
 	private JTextField inputValue;
 	private JComboBox colorList;
+	private JComboBox shapeList;
 
 
 	/**
@@ -106,6 +107,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
 								 "vert", "gris clair", "magenta", "orange",
 								 "gris", "rose", "jaune"};
+		String[] shapeStrings = {"circle", "arrow"};
 
 		// Create the combo box
 		toolBar.add(Box.createRigidArea(HGAP));
@@ -113,6 +115,12 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		toolBar.add(colorLabel);
 		colorList = new JComboBox(colorStrings);
 		toolBar.add(colorList);
+		
+		toolBar.add(Box.createRigidArea(HGAP));
+		JLabel shapeLabel = new JLabel("   Forme: ");
+		toolBar.add(shapeLabel);
+		shapeList = new JComboBox(shapeStrings);
+		toolBar.add(shapeList);
 
 		colorList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -167,14 +175,13 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		feuille.setPreferredSize(new Dimension(600,400));
 			
 		getContentPane().add(feuille,"Center");
-		
-		// Creation de la tortue
-		Dimension size = feuille.getSize();
-		Tortue tortue = controller.createTortue(colorList.getSelectedIndex(), size.width/2, size.height/2);
-		controller.setCourante(tortue);
 
 		pack();
 		setVisible(true);
+		// Creation de la tortue
+		Dimension size = feuille.getSize();
+		Tortue tortue = controller.createTortue(colorList.getSelectedIndex(), shapeList.getSelectedItem().toString(), size.width/2, size.height/2);
+		controller.setCourante(tortue);
 	}
 
 	public String getInputValue(){
@@ -220,8 +227,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			controller.getCourante().baisserCrayon();
 		else if(c.equals("Ajouter")){
 			Dimension size = feuille.getSize();
-			Tortue t = controller.createTortue(colorList.getSelectedIndex(), size.width/2, size.height/2);
-			t.setPosition(500/2, 400/2);
+			Tortue t = controller.createTortue(colorList.getSelectedIndex(), shapeList.getSelectedItem().toString(), size.height/2, size.width/2);
 		}
 		// actions des boutons du bas
 		else if (c.equals("Proc1"))

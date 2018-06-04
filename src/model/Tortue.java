@@ -29,6 +29,7 @@ public class Tortue implements Comparable<Tortue>
 	public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
 	
 	private Integer id;
+	private String shape;
 	private int x, y;	
 	private int dir;
 	private boolean crayon; 
@@ -38,15 +39,16 @@ public class Tortue implements Comparable<Tortue>
 	public void setColor(int n) {coul = n;}
 	public int getColor() {return coul;}
 
-	public Tortue(Integer id, Integer arrowColor, Integer x, Integer y) {
+	public Tortue(Integer id, Integer arrowColor, String shape, Integer x, Integer y) {
 		this.id = id;
 		this.arrowColor = arrowColor;
+		this.shape = shape;
 		reset(x, y);
 	}
 
 	public void reset(Integer x, Integer y) {
-		x = 0;
-		y = 0;
+		this.x = x;
+		this.y = y;
 		dir = -90;
 		coul = 0;
 		crayon = true;
@@ -148,5 +150,11 @@ public class Tortue implements Comparable<Tortue>
 			return 0;
 		}
 		return 1;
+	}
+	public String getShape() {
+		return shape;
+	}
+	public void setShape(String shape) {
+		this.shape = shape;
 	}
 }
