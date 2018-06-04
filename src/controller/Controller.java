@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import model.Form;
 import model.Tortue;
 import view.Segment;
 public class Controller {
@@ -47,10 +46,6 @@ public class Controller {
 		Tortue t = new Tortue(++lastTurtleId, arrowColor, shape, x, y);
 		tortues.put(t, new ArrayList<>());
 		return t;
-	}
-	
-	public void createForm(Tortue t, Form form, Integer... integers){
-		form.createForm(t, integers);
 	}
 	
 	public void createSegment(Tortue t, Integer dist){
@@ -91,12 +86,18 @@ public class Controller {
 		}
 		
 		Segment newSeg = new Segment();
-		if(x == xMax){
-			newSeg.getPtStart().x=0;
+		if(x >= xMax){
+			newSeg.getPtStart().x= xMin;
 			newSeg.getPtStart().y = tortue.getY();
+		} else if (x <= xMin){
+			newSeg.getPtStart().x = xMax;
+			newSeg.getPtStart().y = tortue.getY();
+		} else if (y <= yMin){
+			newSeg.getPtStart().x = tortue.getX();
+			newSeg.getPtStart().y = yMax;
 		} else {
 			newSeg.getPtStart().x = tortue.getX();
-			newSeg.getPtStart().y = 0;
+			newSeg.getPtStart().y = yMin;
 		}
 		return newSeg;
 	}
@@ -115,10 +116,6 @@ public class Controller {
 
 	public void setyMin(int yMin) {
 		this.yMin = yMin;
-	}
-
-	public void drawForm(Form form){
-		form.createForm(courante);
 	}
 
 	public Map<Tortue, List<Segment>> getTortues() {

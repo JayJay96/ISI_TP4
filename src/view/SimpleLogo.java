@@ -9,10 +9,6 @@ import javax.swing.*;
 
 import controller.Controller;
 import controller.RandomTurtlesThread;
-import model.Carre;
-import model.Form;
-import model.Poly;
-import model.Spiral;
 import model.Tortue;
 
 import java.awt.event.*;
@@ -114,7 +110,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
 								 "vert", "gris clair", "magenta", "orange",
 								 "gris", "rose", "jaune"};
-		String[] shapeStrings = {"circle", "arrow"};
+		String[] shapeStrings = {"arrow", "circle"};
 
 		// Create the combo box
 		toolBar.add(Box.createRigidArea(HGAP));
@@ -161,20 +157,6 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		addMenuItem(menuHelp, "A propos", "About", -1);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		// les boutons du bas
-		JPanel p2 = new JPanel(new GridLayout());
-		JButton b20 = new JButton("Proc1");
-		p2.add(b20);
-		b20.addActionListener(this);
-		JButton b21 = new JButton("Proc2");
-		p2.add(b21);
-		b21.addActionListener(this);
-		JButton b22 = new JButton("Proc3");
-		p2.add(b22);
-		b22.addActionListener(this);
-
-		getContentPane().add(p2,"South");
 
 		feuille = new FeuilleDessin(this); //500, 400);
 		feuille.setBackground(Color.white);
@@ -240,36 +222,13 @@ public class SimpleLogo extends JFrame implements ActionListener {
 			Dimension size = feuille.getSize();
 			Tortue t = controller.createTortue(colorList.getSelectedIndex(), shapeList.getSelectedItem().toString(), size.width/2, size.height/2);
 		}
-		// actions des boutons du bas
-		else if (c.equals("Proc1"))
-			proc1();
-		else if (c.equals("Proc2"))
-			proc2();
-		else if (c.equals("Proc3"))
-			proc3();
+		
 		else if (c.equals("Effacer"))
 			effacer();
 		else if (c.equals("Quitter"))
 			quitter();
 
 		feuille.repaint();
-	}
-
-  	/** les procedures Logo qui combine plusieurs commandes..*/
-	public void proc1() {
-		Form carre = new Carre();
-		controller.createForm(controller.getCourante(), carre, 100);
-	}
-
-	public void proc2() {
-		Form poly = new Poly();
-		controller.createForm(controller.getCourante(), poly, 60, 8);
-	}
-
-	public void proc3() {
-		Form spiral = new Spiral();
-		controller.createForm(controller.getCourante(), spiral, 50, 40, 6);
-		
 	}
 
 	// efface tout et reinitialise la feuille
