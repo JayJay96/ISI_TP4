@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Dimension;
 import java.util.Random;
 
 import model.Tortue;
@@ -11,8 +12,11 @@ public class RandomTurtlesThread extends Thread {
 	private FeuilleDessin feuille;
 	
 	public RandomTurtlesThread(FeuilleDessin feuille) {
+		Dimension dim = feuille.getSize();
 		for(int i = 0; i <5; i++){
-			controller.createTortue(i);
+			Tortue t = controller.createTortue(i, dim.height/2, dim.width/2);
+			t.setColor(i);
+			t.setPosition(dim.height/2, dim.width/2);
 		}
 		this.feuille = feuille;
 	}

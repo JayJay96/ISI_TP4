@@ -172,6 +172,9 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		Dimension size = feuille.getSize();
 		Tortue tortue = controller.createTortue(colorList.getSelectedIndex(), size.width/2, size.height/2);
 		controller.setCourante(tortue);
+		
+		controller.setxMax(feuille.getWidth());
+		controller.setyMax(feuille.getHeight());
 
 		pack();
 		setVisible(true);

@@ -20,6 +20,7 @@ public class Controller {
 	private Map<Tortue, Polygon> polygon = new TreeMap<>();
 	private Tortue courante;
 	private Integer lastTurtleId = 0;
+	private int xMax, xMin, yMax, yMin;
 	
 	private Controller(){
 		
@@ -57,6 +58,17 @@ public class Controller {
 		seg.getPtStart().x = t.getX();
 		seg.getPtStart().y = t.getY();
 		t.avancer(dist);
+		t.leverCrayon();
+		if(t.getX() > xMax){
+			t.setPosition(xMax - t.getX(), t.getY());
+		} else if (t.getX() < xMin){
+			t.setPosition(xMax + t.getX(), t.getY());
+		} else if (t.getY() > yMax){
+			t.setPosition(t.getX(), yMax - t.getY());
+		} else if (t.getY() < yMin){
+			t.setPosition(t.getX(), yMin + t.getY());
+		}
+		t.baisserCrayon();
 		seg.getPtEnd().x = t.getX();
 		seg.getPtEnd().y = t.getY();
 		seg.setColor(colors.containsKey(t.getColor())? colors.get(t.getColor()): Color.BLACK);
@@ -67,6 +79,22 @@ public class Controller {
 			tortues.get(t).add(seg);
 	}
 	
+	public void setxMax(int xMax) {
+		this.xMax = xMax;
+	}
+
+	public void setxMin(int xMin) {
+		this.xMin = xMin;
+	}
+
+	public void setyMax(int yMax) {
+		this.yMax = yMax;
+	}
+
+	public void setyMin(int yMin) {
+		this.yMin = yMin;
+	}
+
 	public void drawForm(Form form){
 		form.createForm(courante);
 	}
